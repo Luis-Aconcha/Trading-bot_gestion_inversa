@@ -430,18 +430,18 @@ while ciclo_A1 or ciclo_A1 > -10:
             else:
                 if cuenta_actual_A1 > cuenta_actual_A2:
                     trade_id_A2, tipo_A2, tp_A2, sl_A1, hora, error_A2, graficar_A2 = abrir_operacion ("A2", units_A2, tp_price_A2, sl_price_A2, ciclo_A2, paso_ratio_A2, tamaño_cuenta_ciclo_A2, ratio_A2, cuenta_actual_A2, tp_pips_A1, ACCOUNT_ID_A2)
-                        if graficar_A2:
-                            time.sleep(2)
-                            while graficar_A1:
-                                trade_id_A1, tipo_A1, tp_A1, sl_A1, hora, error_A1, graficar_A1 = abrir_operacion ("A1", units_A1, tp_price_A1, sl_price_A1, ciclo_A1, paso_ratio_A1, tamaño_cuenta_ciclo_A1, ratio_A1, cuenta_actual_A1, tp_pips_A1, ACCOUNT_ID_A1)
-                                time.sleep(5)
+                    if graficar_A2:
+                        time.sleep(2)
+                        while graficar_A1:
+                            trade_id_A1, tipo_A1, tp_A1, sl_A1, hora, error_A1, graficar_A1 = abrir_operacion ("A1", units_A1, tp_price_A1, sl_price_A1, ciclo_A1, paso_ratio_A1, tamaño_cuenta_ciclo_A1, ratio_A1, cuenta_actual_A1, tp_pips_A1, ACCOUNT_ID_A1)
+                            time.sleep(5)
                 else:
                     trade_id_A1, tipo_A1, tp_A1, sl_A1, hora, error_A1, graficar_A1 = abrir_operacion ("A1", units_A1, tp_price_A1, sl_price_A1, ciclo_A1, paso_ratio_A1, tamaño_cuenta_ciclo_A1, ratio_A1, cuenta_actual_A1, tp_pips_A1, ACCOUNT_ID_A1)
-                        if graficar_A1:
-                            time.sleep(2)
-                            while graficar_A2:
-                                trade_id_A2, tipo_A2, tp_A2, sl_A1, hora, error_A2, graficar_A2 = abrir_operacion ("A2", units_A2, tp_price_A2, sl_price_A2, ciclo_A2, paso_ratio_A2, tamaño_cuenta_ciclo_A2, ratio_A2, cuenta_actual_A2, tp_pips_A1, ACCOUNT_ID_A2)
-                                time.sleep(5)
+                    if graficar_A1:
+                        time.sleep(2)
+                        while graficar_A2:
+                            trade_id_A2, tipo_A2, tp_A2, sl_A1, hora, error_A2, graficar_A2 = abrir_operacion ("A2", units_A2, tp_price_A2, sl_price_A2, ciclo_A2, paso_ratio_A2, tamaño_cuenta_ciclo_A2, ratio_A2, cuenta_actual_A2, tp_pips_A1, ACCOUNT_ID_A2)
+                            time.sleep(5)
                     
             if trade_id_A1 or trade_id_A2 == "margen":
                 tp_pips_A1 +=  1
