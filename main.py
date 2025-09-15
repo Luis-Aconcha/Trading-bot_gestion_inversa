@@ -162,6 +162,31 @@ def obtener_precio_actual(instrumento):
             time.sleep(5)
     return bid_price, ask_price, mid_price
 
+def SMA(instrumento, velas_SMA, periodo_SMA, temporalidad_SMA):
+    url = f"{OANDA_URL}/instruments/{instrumento}/candles"
+    params = {
+        "count": velas_SMA,
+        "granularity": temporalidad_SMA,
+        "price": "M"  # Midpoint
+    }
+
+    sma = None
+    while sma is None:
+        try:
+            response = requests.get(url, headers=HEADERS, params=params, timeout=(5, 5))
+            data = response.json()
+        
+            cierres = [float(c["mid"]["c"]) for c in data["candles"] if c["complete"]]
+            serie = pd.Series(cierres)
+            sma = serie.rolling(window=periodo_SMA).mean()
+            if sma.empty:
+                print("No se pudo obtener SMA", data)
+                time.sleep(5)
+        except Exception as e:
+            print("Excepción al intentar obtener SMA:", e)
+            time.sleep(5)
+    return sma.iloc[-1]  
+
 def calcular_units_por_valor_pip(valor_deseado_por_pip, precio):
     if not precio:
         print("No precio actual, units")
