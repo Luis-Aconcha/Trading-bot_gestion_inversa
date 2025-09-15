@@ -54,8 +54,8 @@ def agregar_datos(cuenta, tipo, precio_entrada, tp, sl, tp_pips, ciclo, ratio, p
             service = autenticar_google()
             body = {"values": [datos]}
             result = service.spreadsheets().values().append(
-                spreadsheetId=SPREADSHEET_ID,
                 range,
+                spreadsheetId=SPREADSHEET_ID,
                 valueInputOption="USER_ENTERED",
                 body=body
             ).execute()
@@ -72,4 +72,5 @@ def agregar_datos(cuenta, tipo, precio_entrada, tp, sl, tp_pips, ciclo, ratio, p
             print("Error al agregar datos a la hoja:", e)
             time.sleep(5)
         
+
 
