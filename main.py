@@ -42,7 +42,7 @@ ratio_A2 = float(serie_ratios[paso_ratio_A2])
 porcentaje_A1 = float(serie_porcentajes[paso_ratio_A1])
 porcentaje_A2 = float(serie_porcentajes[paso_ratio_A2])
 
-def restriccion(momento)
+def restriccion(momento):
     hora_franja = datetime.now(ZoneInfo("America/Bogota"))
     dia = hora_franja.weekday()     # Lunes=0, ..., Domingo=6
     hora_num = hora_franja.hour
