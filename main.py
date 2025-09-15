@@ -263,7 +263,7 @@ def nuevo_sma(tp_pips):
 # Datos operación
 instrumento = "EUR_USD"
 tp_pips_A1 = 10
-sl_pips_A1 = round(tp_pips / ratioA1)                                                                    #SL MODIFICADO
+sl_pips_A1 = round(tp_pips_A1 / ratio_A1)                                                                    #SL MODIFICADO
 tamaño_cuenta_ciclo_A1 = obtener_balance("A1")
 time.sleep(3)
 tamaño_cuenta_ciclo_A2 = obtener_balance("A2")
@@ -273,7 +273,6 @@ time.sleep(3)
 cuenta_actual_A1 = None
 revision = None
 trade_id_A1 = None
-graficar = None
 error_A1 = None
 while ciclo_A1 or ciclo_A1 > -10:
     permiso = restriccion("abiertos")
