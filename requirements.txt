@@ -1,0 +1,16 @@
+matplotlib
+mplfinance==0.12.10b0
+numpy
+pandas
+pandas_ta
+oandapyV20==0.7.2
+packaging==25.0
+python-dateutil==2.9.0.post0
+requests==2.32.3
+gspread
+oauth2client
+google-auth
+google-api-python-client
+
+
+
