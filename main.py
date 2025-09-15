@@ -273,6 +273,7 @@ time.sleep(3)
 cuenta_actual_A1 = None
 revision = None
 trade_id_A1 = None
+graficar_A1 = None
 error_A1 = None
 while ciclo_A1 or ciclo_A1 > -10:
     permiso = restriccion("abiertos")
