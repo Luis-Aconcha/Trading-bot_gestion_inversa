@@ -191,7 +191,7 @@ def calcular_units_por_valor_pip(valor_deseado_por_pip, precio):
     if not precio:
         print("No precio actual, units")
         return None
-    units = round((valor_deseado_por_pip * precio) / 1.05, 5) / 0.0001                               # CORRECCIÓN DE UNIDADES
+    units = round(valor_deseado_por_pip * precio, 5) / 0.0001                               # CORRECCIÓN DE UNIDADES
     return int(units)  
 
 def abrir_operacion(cuenta, unidades, tp_price, sl_price, ciclo, paso_ratio, tamaño_cuenta_ciclo, ratio, cuenta_actual, tp_pips, ACCOUNT_ID):
@@ -288,7 +288,7 @@ def nuevo_sma(tp_pips):
 # Datos operación
 instrumento = "EUR_USD"
 tp_pips_A1 = 10
-sl_pips_A1 = round(tp_pips_A1 / ratio_A1)                                                                    #SL MODIFICADO
+sl_pips_A1 = round(tp_pips_A1 / ratio_A1, 1)                                                                    #SL MODIFICADO
 tamaño_cuenta_ciclo_A1 = obtener_balance("A1")
 time.sleep(3)
 tamaño_cuenta_ciclo_A2 = obtener_balance("A2")
@@ -470,7 +470,7 @@ while ciclo_A1 or ciclo_A1 > -10:
                     
             if trade_id_A1 or trade_id_A2 == "margen":
                 tp_pips_A1 +=  1
-                sl_pips_A1 = round((tp_pips_A1 / ratio_A1) / 1.1, 1)  #Recalcula                                  #SL MODIFICADO
+                sl_pips_A1 = round(tp_pips_A1 / ratio_A1, 1)  #Recalcula                                  #SL MODIFICADO
                 cuenta_actual_A1 == None
              
         revision = None
