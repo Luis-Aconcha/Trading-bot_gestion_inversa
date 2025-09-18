@@ -299,6 +299,7 @@ cuenta_actual_A1 = None
 revision = None
 trade_id_A1 = None
 graficar_A1 = None
+graficar_A2 = None
 error_A1 = None
 while ciclo_A1 or ciclo_A1 > -10:
     permiso = restriccion("abiertos")
@@ -306,6 +307,7 @@ while ciclo_A1 or ciclo_A1 > -10:
         print("Franja restricción")
         time.sleep(3600)
         permiso = restriccion("abiertos")
+        
     control_ciclo_A1, abiertos_A1 = trades_abiertos("A1")
     time.sleep(3)
     if not abiertos_A1:
@@ -401,6 +403,8 @@ while ciclo_A1 or ciclo_A1 > -10:
                 ratio_A2 = float(serie_ratios[paso_ratio_A2])
                 porcentaje_A1 = float(serie_porcentajes[paso_ratio_A1])
                 porcentaje_A2 = float(serie_porcentajes[paso_ratio_A2])
+                graficar_A1 = None
+                graficar_A2 = None
         
         beneficio_A1 = (tamaño_cuenta_ciclo_A1) * porcentaje_A1                                                       # AJUSTE DE SALDO
         perdida_A2 = (tamaño_cuenta_ciclo_A2) * porcentaje_A2      
@@ -438,18 +442,19 @@ while ciclo_A1 or ciclo_A1 > -10:
                 print("Franja restricción")
                 time.sleep(3600)
                 permiso = restriccion("nuevos")
-            if units_A1 > units_A2:       
+                
+            if units_A1 > units_A2:
                 trade_id_A1, tipo_A1, tp_A1, sl_A1, hora, error_A1, graficar_A1 = abrir_operacion ("A1", units_A1, tp_price_A1, sl_price_A1, ciclo_A1, paso_ratio_A1, tamaño_cuenta_ciclo_A1, mid_price, ratio_A1, cuenta_actual_A1, tp_pips_A1, ACCOUNT_ID_A1)
                 if graficar_A1:
                     time.sleep(2)
-                    while graficar_A2:
+                    while not graficar_A2:
                         trade_id_A2, tipo_A2, tp_A2, sl_A1, hora, error_A2, graficar_A2 = abrir_operacion ("A2", units_A2, tp_price_A2, sl_price_A2, ciclo_A2, paso_ratio_A2, tamaño_cuenta_ciclo_A2, mid_price, ratio_A2, cuenta_actual_A2, tp_pips_A1, ACCOUNT_ID_A2)
                         time.sleep(5)
             elif units_A1 < units_A2:
                 trade_id_A2, tipo_A2, tp_A2, sl_A1, hora, error_A2, graficar_A2 = abrir_operacion ("A2", units_A2, tp_price_A2, sl_price_A2, ciclo_A2, paso_ratio_A2, tamaño_cuenta_ciclo_A2, ratio_A2, mid_price, cuenta_actual_A2, tp_pips_A1, ACCOUNT_ID_A2)
                 if graficar_A2:
                     time.sleep(2)
-                    while graficar_A1:
+                    while not graficar_A1:
                         trade_id_A1, tipo_A1, tp_A1, sl_A1, hora, error_A1, graficar_A1 = abrir_operacion ("A1", units_A1, tp_price_A1, sl_price_A1, ciclo_A1, paso_ratio_A1, tamaño_cuenta_ciclo_A1, mid_price, ratio_A1, cuenta_actual_A1, tp_pips_A1, ACCOUNT_ID_A1)
                         time.sleep(5)
             else:
@@ -457,14 +462,14 @@ while ciclo_A1 or ciclo_A1 > -10:
                     trade_id_A2, tipo_A2, tp_A2, sl_A1, hora, error_A2, graficar_A2 = abrir_operacion ("A2", units_A2, tp_price_A2, sl_price_A2, ciclo_A2, paso_ratio_A2, tamaño_cuenta_ciclo_A2, mid_price, ratio_A2, cuenta_actual_A2, tp_pips_A1, ACCOUNT_ID_A2)
                     if graficar_A2:
                         time.sleep(2)
-                        while graficar_A1:
+                        while not graficar_A1:
                             trade_id_A1, tipo_A1, tp_A1, sl_A1, hora, error_A1, graficar_A1 = abrir_operacion ("A1", units_A1, tp_price_A1, sl_price_A1, ciclo_A1, paso_ratio_A1, tamaño_cuenta_ciclo_A1, mid_price, ratio_A1, cuenta_actual_A1, tp_pips_A1, ACCOUNT_ID_A1)
                             time.sleep(5)
                 else:
                     trade_id_A1, tipo_A1, tp_A1, sl_A1, hora, error_A1, graficar_A1 = abrir_operacion ("A1", units_A1, tp_price_A1, sl_price_A1, ciclo_A1, paso_ratio_A1, tamaño_cuenta_ciclo_A1, mid_price, ratio_A1, cuenta_actual_A1, tp_pips_A1, ACCOUNT_ID_A1)
                     if graficar_A1:
                         time.sleep(2)
-                        while graficar_A2:
+                        while not graficar_A2:
                             trade_id_A2, tipo_A2, tp_A2, sl_A1, hora, error_A2, graficar_A2 = abrir_operacion ("A2", units_A2, tp_price_A2, sl_price_A2, ciclo_A2, paso_ratio_A2, tamaño_cuenta_ciclo_A2, mid_price, ratio_A2, cuenta_actual_A2, tp_pips_A1, ACCOUNT_ID_A2)
                             time.sleep(5)
                     
