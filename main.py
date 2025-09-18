@@ -194,13 +194,13 @@ def calcular_units_por_valor_pip(valor_deseado_por_pip, precio):
     units = round(valor_deseado_por_pip * precio, 5) / 0.0001                               # CORRECCIÓN DE UNIDADES
     return int(units)  
 
-def abrir_operacion(cuenta, unidades, tp_price, sl_price, ciclo, paso_ratio, tamaño_cuenta_ciclo, ratio, cuenta_actual, tp_pips, ACCOUNT_ID):
+def abrir_operacion(cuenta, unidades, tp_price, sl_price, ciclo, paso_ratio, tamaño_cuenta_ciclo, precio_entrada, ratio, cuenta_actual, tp_pips, ACCOUNT_ID):
     if tp_price > sl_price:
             tipo = "buy"
     elif tp_price < sl_price:
             tipo = "sell"
     else:
-        exportación = exportar_datos.agregar_datos_A(["Error: No se pudo determinar el tipo (abrir operación)", "Cuenta: ", cuenta, tp_price, sl_price])
+        exportación = exportar_datos.agregar_datos(["Error: No se pudo determinar el tipo (abrir operación)", "Cuenta: ", cuenta, tp_price, sl_price])
         print("Error: No se pudo determinar el tipo (abrir operación)", cuenta, tp_price, sl_price)
         return None, None, None, None, None, True, None
     hora = hora_colombia_formateada()
@@ -223,7 +223,7 @@ def abrir_operacion(cuenta, unidades, tp_price, sl_price, ciclo, paso_ratio, tam
             }
         }
     except Exception as e:
-        exportación = exportar_datos.agregar_datos_A(["Cuenta: ", cuenta, str(e)])
+        exportación = exportar_datos.agregar_datos(["Cuenta: ", cuenta, str(e)])
         return None, None, None, None, None, True, None
 
     try: 
@@ -439,33 +439,33 @@ while ciclo_A1 or ciclo_A1 > -10:
                 time.sleep(3600)
                 permiso = restriccion("nuevos")
             if units_A1 > units_A2:       
-                trade_id_A1, tipo_A1, tp_A1, sl_A1, hora, error_A1, graficar_A1 = abrir_operacion ("A1", units_A1, tp_price_A1, sl_price_A1, ciclo_A1, paso_ratio_A1, tamaño_cuenta_ciclo_A1, ratio_A1, cuenta_actual_A1, tp_pips_A1, ACCOUNT_ID_A1)
+                trade_id_A1, tipo_A1, tp_A1, sl_A1, hora, error_A1, graficar_A1 = abrir_operacion ("A1", units_A1, tp_price_A1, sl_price_A1, ciclo_A1, paso_ratio_A1, tamaño_cuenta_ciclo_A1, mid_price, ratio_A1, cuenta_actual_A1, tp_pips_A1, ACCOUNT_ID_A1)
                 if graficar_A1:
                     time.sleep(2)
                     while graficar_A2:
-                        trade_id_A2, tipo_A2, tp_A2, sl_A1, hora, error_A2, graficar_A2 = abrir_operacion ("A2", units_A2, tp_price_A2, sl_price_A2, ciclo_A2, paso_ratio_A2, tamaño_cuenta_ciclo_A2, ratio_A2, cuenta_actual_A2, tp_pips_A1, ACCOUNT_ID_A2)
+                        trade_id_A2, tipo_A2, tp_A2, sl_A1, hora, error_A2, graficar_A2 = abrir_operacion ("A2", units_A2, tp_price_A2, sl_price_A2, ciclo_A2, paso_ratio_A2, tamaño_cuenta_ciclo_A2, mid_price, ratio_A2, cuenta_actual_A2, tp_pips_A1, ACCOUNT_ID_A2)
                         time.sleep(5)
             elif units_A1 < units_A2:
-                trade_id_A2, tipo_A2, tp_A2, sl_A1, hora, error_A2, graficar_A2 = abrir_operacion ("A2", units_A2, tp_price_A2, sl_price_A2, ciclo_A2, paso_ratio_A2, tamaño_cuenta_ciclo_A2, ratio_A2, cuenta_actual_A2, tp_pips_A1, ACCOUNT_ID_A2)
+                trade_id_A2, tipo_A2, tp_A2, sl_A1, hora, error_A2, graficar_A2 = abrir_operacion ("A2", units_A2, tp_price_A2, sl_price_A2, ciclo_A2, paso_ratio_A2, tamaño_cuenta_ciclo_A2, ratio_A2, mid_price, cuenta_actual_A2, tp_pips_A1, ACCOUNT_ID_A2)
                 if graficar_A2:
                     time.sleep(2)
                     while graficar_A1:
-                        trade_id_A1, tipo_A1, tp_A1, sl_A1, hora, error_A1, graficar_A1 = abrir_operacion ("A1", units_A1, tp_price_A1, sl_price_A1, ciclo_A1, paso_ratio_A1, tamaño_cuenta_ciclo_A1, ratio_A1, cuenta_actual_A1, tp_pips_A1, ACCOUNT_ID_A1)
+                        trade_id_A1, tipo_A1, tp_A1, sl_A1, hora, error_A1, graficar_A1 = abrir_operacion ("A1", units_A1, tp_price_A1, sl_price_A1, ciclo_A1, paso_ratio_A1, tamaño_cuenta_ciclo_A1, mid_price, ratio_A1, cuenta_actual_A1, tp_pips_A1, ACCOUNT_ID_A1)
                         time.sleep(5)
             else:
                 if cuenta_actual_A1 > cuenta_actual_A2:
-                    trade_id_A2, tipo_A2, tp_A2, sl_A1, hora, error_A2, graficar_A2 = abrir_operacion ("A2", units_A2, tp_price_A2, sl_price_A2, ciclo_A2, paso_ratio_A2, tamaño_cuenta_ciclo_A2, ratio_A2, cuenta_actual_A2, tp_pips_A1, ACCOUNT_ID_A2)
+                    trade_id_A2, tipo_A2, tp_A2, sl_A1, hora, error_A2, graficar_A2 = abrir_operacion ("A2", units_A2, tp_price_A2, sl_price_A2, ciclo_A2, paso_ratio_A2, tamaño_cuenta_ciclo_A2, mid_price, ratio_A2, cuenta_actual_A2, tp_pips_A1, ACCOUNT_ID_A2)
                     if graficar_A2:
                         time.sleep(2)
                         while graficar_A1:
-                            trade_id_A1, tipo_A1, tp_A1, sl_A1, hora, error_A1, graficar_A1 = abrir_operacion ("A1", units_A1, tp_price_A1, sl_price_A1, ciclo_A1, paso_ratio_A1, tamaño_cuenta_ciclo_A1, ratio_A1, cuenta_actual_A1, tp_pips_A1, ACCOUNT_ID_A1)
+                            trade_id_A1, tipo_A1, tp_A1, sl_A1, hora, error_A1, graficar_A1 = abrir_operacion ("A1", units_A1, tp_price_A1, sl_price_A1, ciclo_A1, paso_ratio_A1, tamaño_cuenta_ciclo_A1, mid_price, ratio_A1, cuenta_actual_A1, tp_pips_A1, ACCOUNT_ID_A1)
                             time.sleep(5)
                 else:
-                    trade_id_A1, tipo_A1, tp_A1, sl_A1, hora, error_A1, graficar_A1 = abrir_operacion ("A1", units_A1, tp_price_A1, sl_price_A1, ciclo_A1, paso_ratio_A1, tamaño_cuenta_ciclo_A1, ratio_A1, cuenta_actual_A1, tp_pips_A1, ACCOUNT_ID_A1)
+                    trade_id_A1, tipo_A1, tp_A1, sl_A1, hora, error_A1, graficar_A1 = abrir_operacion ("A1", units_A1, tp_price_A1, sl_price_A1, ciclo_A1, paso_ratio_A1, tamaño_cuenta_ciclo_A1, mid_price, ratio_A1, cuenta_actual_A1, tp_pips_A1, ACCOUNT_ID_A1)
                     if graficar_A1:
                         time.sleep(2)
                         while graficar_A2:
-                            trade_id_A2, tipo_A2, tp_A2, sl_A1, hora, error_A2, graficar_A2 = abrir_operacion ("A2", units_A2, tp_price_A2, sl_price_A2, ciclo_A2, paso_ratio_A2, tamaño_cuenta_ciclo_A2, ratio_A2, cuenta_actual_A2, tp_pips_A1, ACCOUNT_ID_A2)
+                            trade_id_A2, tipo_A2, tp_A2, sl_A1, hora, error_A2, graficar_A2 = abrir_operacion ("A2", units_A2, tp_price_A2, sl_price_A2, ciclo_A2, paso_ratio_A2, tamaño_cuenta_ciclo_A2, mid_price, ratio_A2, cuenta_actual_A2, tp_pips_A1, ACCOUNT_ID_A2)
                             time.sleep(5)
                     
             if trade_id_A1 or trade_id_A2 == "margen":
