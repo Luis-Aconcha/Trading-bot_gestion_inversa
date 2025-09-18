@@ -130,8 +130,6 @@ def trades_abiertos(cuenta):
             id_str = client_ext.get("id")
             if id_str:
                datos = decodificar_id(id_str)
-            else:
-               datos = None
         if datos:
             return datos, len(trades) > 0
         else:
@@ -309,6 +307,7 @@ while ciclo_A1 or ciclo_A1 > -10:
         permiso = restriccion("abiertos")
         
     control_ciclo_A1, abiertos_A1 = trades_abiertos("A1")
+    print(abiertos_A1)
     time.sleep(3)
     if not abiertos_A1:
         control_ciclo_A2, abiertos_A2 = trades_abiertos("A2")
