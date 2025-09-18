@@ -309,10 +309,10 @@ while ciclo_A1 or ciclo_A1 > -10:
     control_ciclo_A1, abiertos_A1 = trades_abiertos("A1")
     print(control_ciclo_A1)
     time.sleep(3)
-    if not abiertos_A1:
-        control_ciclo_A2, abiertos_A2 = trades_abiertos("A2")
-        print(control_ciclo_A2)
-        time.sleep(3)
+    control_ciclo_A2, abiertos_A2 = trades_abiertos("A2")
+    print(control_ciclo_A2)
+    time.sleep(3)
+
     if abiertos_A1 or abiertos_A2:
         if not revision:
             if control_ciclo_A1 and control_ciclo_A2:
