@@ -30,9 +30,9 @@ def autenticar_google():
 def agregar_datos(cuenta, tipo, precio_entrada, tp, sl, tp_pips, ciclo, ratio, paso_ratio, resultado, hora, hora_actual, ganancia, cuenta_actual):
     aprobacion = None
     if cuenta == "A":
-        range = RANGO_A
+        rango = RANGO_A
     else:
-        range = RANGO_B
+        rango = RANGO_B
     while not aprobacion:
         try:
             datos = [
@@ -52,12 +52,12 @@ def agregar_datos(cuenta, tipo, precio_entrada, tp, sl, tp_pips, ciclo, ratio, p
             ]
             """Añade una fila con nuevos datos a la hoja."""
             service = autenticar_google()
-            body = {"values": [datos]}
+            cuerpo = {"values": [datos]}
             result = service.spreadsheets().values().append(
-                range,
+                range=rango,
                 spreadsheetId=SPREADSHEET_ID,
                 valueInputOption="USER_ENTERED",
-                body=body
+                body=cuerpo
             ).execute()
     
             # Validar que se insertaron filas correctamente
@@ -72,5 +72,6 @@ def agregar_datos(cuenta, tipo, precio_entrada, tp, sl, tp_pips, ciclo, ratio, p
             print("Error al agregar datos a la hoja:", e)
             time.sleep(5)
         
+
 
 
